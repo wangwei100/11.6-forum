@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserBbsMapper">
+	<resultMap id="BaseResultMap" type="com.example.demo.model.UserBbs">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="INTEGER" property="user_id" />
+		<result column="bbs_id" jdbcType="INTEGER" property="bbs_id" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,user_id,bbs_id
+	</sql>
+
+
+
+	<insert id="insert">
+		insert into user_bbs (user_id,bbs_id) values
+		(#{user_id},#{bbs_id});
+	</insert>
+
+	<delete id="delete">
+		delete from user_bbs where user_id=#{user_id} and
+		bbs_id=#{bbs_id} limit 1;
+	</delete>
+
+	<select id="list" resultMap="BaseResultMap">
+		select * from user_bbs;
+	</select>
+
+	<select id="get" resultMap="BaseResultMap">
+		select * from user_bbs where id =
+		#{id} limit 1;
+	</select>
+
+	<select id="getByUserIdBbsId" resultMap="BaseResultMap">
+		select * from user_bbs
+		where user_id=#{user_id} and bbs_id=#{bbs_id} limit 1;
+	</select>
+
+	<select id="getById" resultMap="BaseResultMap">
+		select * from user_bbs where
+		id=#{id};
+	</select>
+
+	<select id="countByUserId" resultType="int">
+		select count(*) from
+		user_bbs where user_id=#{user_id};
+	</select>
+</mapper>

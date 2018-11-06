@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<a href="/register">注册</a>
+	<br />
+	<a href="/login">登录</a>
+	<br />
+	<a href="/do_publish">发帖</a>
+	<br />
+	<div align="left">
+
+		<span> <input id="txt_select" type="text"> <input
+			id="txt_select" type="submit" value="搜索"
+			style="color: blue; width: 50px; height: 22px" />
+		</span>
+
+	</div>
+	<div>
+		<table>
+			<tr>
+				<th>标题</th>
+				<th>发帖人</th>
+				<th>发帖时间</th>
+			</tr>
+			<#list bbsPage.list as bbs>
+			<tr>
+				<td>${bbs.title}</td>
+				<td>${bbs.owner}</td>
+				<td>${bbs.time?string('yyyy-MM-dd HH:mm:ss')}</td>
+			</tr>
+			</#list>
+		</table>
+	</div>
+
+	<div>
+		
+		<#list bbsPage.begin..bbsPage.end as i> 
+		<#if title??>
+		
+		<a href="/home?title=${title?if_exists}&pageNum=${i}">${i}</a>
+		
+		<#else>
+		
+		<a href="/home?pageNum=${i}">${i}</a>
+		
+		</#if>
+		</#list>
+
+
+		
+	</div>
+</body>
+</html>
